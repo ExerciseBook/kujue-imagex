@@ -1,0 +1,8 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "exercisebook/discuzx-imagex-storage",
+    "require": {
+        "guzzlehttp/guzzle": "^7.3",
+        "symfony/polyfill-php80": "^1.23"
+    }
+}

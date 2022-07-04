@@ -1,0 +1,94 @@
+<div>
+    <div class="form-group r r114514">
+        <div class="col-md-2"></div>
+        <div class="col-md-9">
+            <h2>登陆信息</h2>
+            <p>这部分为火山引擎的登陆信息。您的登陆信息可以在<a href="https://console.volcengine.com/iam/keymanage/">火山引擎控制台</a>中找到。</p>
+        </div>
+    </div>
+
+    <div class="form-group r r114514">
+        <label class="col-md-2 control-label">AccessKey ID</label>
+        <div class="col-md-7">
+            <input name="data[value][114514][assess_key]" value="{$data['value']['assess_key']}" class="form-control"
+                   type="text"/>
+        </div>
+    </div>
+
+    <div class="form-group r r114514">
+        <label class="col-md-2 control-label">AccessKey Secret</label>
+        <div class="col-md-7">
+            <input name="data[value][114514][assess_secret]" value="{$data['value']['assess_secret']}"
+                   class="form-control" type="text"/>
+        </div>
+    </div>
+
+    <div class="form-group r r114514">
+        <div class="col-md-2"></div>
+        <div class="col-md-9">
+            <h2>ImageX 存储设置</h2>
+            <p>这部分为 ImageX 的存储设置信息。</p>
+        </div>
+    </div>
+
+    <div class="form-group r r114514">
+        <label class="col-md-2 control-label">存储区域</label>
+        <div class="col-md-7">
+            <select name="data[value][114514][region]" value="{$data['value']['region']}"
+                    class="form-control">
+                <option value="cn-north-1">中国大陆 cn-north-1</option>
+                <option value="us-east-1">美国东海岸 us-east-1</option>
+                <option value="ap-singapore-1">新加坡 ap-singapore-1</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group r r114514">
+        <label class="col-md-2 control-label">存储类型</label>
+        <div class="col-md-7">
+            <select name="data[value][114514][storage_type]" id="data[value][114514][storage_type]"
+                    value="{$data['value']['storage_type']}" class="form-control" onchange="onTypeChange()">
+                <option value="image">图片处理</option>
+                <option value="file">素材托管</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group r r114514">
+        <label class="col-md-2 control-label">服务 ID</label>
+        <div class="col-md-7">
+            <input name="data[value][114514][service_id]" value="{$data['value']['service_id']}"
+                   class="form-control" type="text"/>
+        </div>
+    </div>
+
+    <div id="data_value_114514_template_panel_id" class="form-group r r114514">
+        <label class="col-md-2 control-label">图像模板</label>
+        <div class="col-md-7">
+            <input name="data[value][114514][template]" value="{$data['value']['template']}"
+                   class="form-control" type="text"/>
+        </div>
+    </div>
+
+    <div class="form-group r r114514">
+        <label class="col-md-2 control-label">绑定域名</label>
+        <div class="col-md-7">
+            <input name="data[value][114514][domain]" value="{$data['value']['domain']}"
+                   class="form-control" type="text"/>
+        </div>
+    </div>
+
+
+
+    <script>
+        function onTypeChange() {
+            let type = document.getElementById("data[value][114514][storage_type]").value
+            let panel = document.getElementById("data_value_114514_template_panel_id")
+            if (type === "file") {
+                panel.setAttribute("style", "display: none;")
+            } else {
+                panel.removeAttribute("style")
+            }
+        }
+    </script>
+</div>
