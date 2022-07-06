@@ -34,6 +34,6 @@ class Config extends ImageXConfig
      * @return bool
      */
     public function hasTemplate() {
-        return ($this->template === null || trim($this->template) === '');
+        return !($this->template === null || trim($this->template) === '');
     }
 }

@@ -42,7 +42,14 @@ class ImageXKuJueProvider
         $this->config->domain = $attachmentConfig['value']['domain'];
 
         $this->config->storageType = $attachmentConfig['value']['storage_type'];
-        $this->config->template  = $attachmentConfig['value']['template'];
+        $template = $attachmentConfig['value']['template'];
+        if (strpos($template, '~')  === 0) {
+            $template = substr($template, 1, strlen($template));
+        }
+        if (strpos($template, '.') === false) {
+            $template = $template . '.image';
+        }
+        $this->config->template = $template;
 
         $this->command = new FileProcessingCommand();
         $this->command->filename = $filename;
@@ -64,9 +71,15 @@ class ImageXKuJueProvider
         $meta = $this->imagexService->writeStream($this->command->filename, $contents, new ImageXConfig());
 
         $md5 = md5_file($this->command->filename);
+
         $schemeHttps = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'));
+        $url = ($schemeHttps ? 'https:' : 'http:') . "//" . $this->config->domain . '/' . $this->command->filename;
+        if ($this->config->isImageProcessing() && $this->config->hasTemplate()) {
+            $url = $url . '~' . $this->config->template;
+        }
+
         return dr_return_data(1, 'ok', [
-            'url' =>  ($schemeHttps ? 'https:' : 'http:') . "//" . $this->config->domain . '/' . $this->imagexService->imageXBuildUriPrefix() . '/' . $this->command->filename,
+            'url' =>  $url,
             'md5' => $md5,
             'size' => $meta,
             'info' => $meta
