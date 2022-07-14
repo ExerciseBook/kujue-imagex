@@ -81,7 +81,7 @@ class ImageXKuJueProvider
         return dr_return_data(1, 'ok', [
             'url' =>  $url,
             'md5' => $md5,
-            'size' => $meta,
+            'size' => $meta['size'],
             'info' => $meta
         ]);
     }
